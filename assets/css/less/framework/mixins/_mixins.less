@@ -1,0 +1,369 @@
+// -----------------------------------------
+// COMMON MIXINS
+// -----------------------------------------
+
+// SIMPLE IF OPERATOR ----------------------
+// @isNone — переменная куда попадает результат
+// @var — значение которое подлежит сравнению
+// @trueValue — результат при удачном сравнении
+// @falseValue — результат при неудачном сравнении
+@isNone: '';
+.isNone(@var, @trueValue, @falseValue) {
+  @_trueValue: ~'@{trueValue}';
+  @_falseValue: ~'@{falseValue}';
+  @isNone: ~`("@{var}" == "none")? "@{_trueValue}": "@{_falseValue}"`;
+}
+
+// @isTrue — переменная куда попадает результат
+// @var — значение которое подлежит сравнению
+// @trueValue — результат при удачном сравнении
+// @falseValue — результат при неудачном сравнении
+@isTrue: '';
+.isTrue(@var, @trueValue, @falseValue) {
+  @_trueValue: ~'@{trueValue}';
+  @_falseValue: ~'@{falseValue}';
+  @isTrue: ~`("@{var}" == "true")? "@{_trueValue}": "@{_falseValue}"`;
+}
+// -----------------------------------------
+
+// CLEARFIX --------------------------------
+.clearfix() {
+  *zoom: 1;
+  &:after, &:before {
+      display: table;
+      content: "";
+  }
+  &:after {
+      clear: both;
+  }
+}
+// -----------------------------------------
+
+// SIZE ELEMENT ----------------------------
+.size(@width: 0px, @height: 0px) {
+  width: @width;
+  height: @height;
+}
+// -----------------------------------------
+
+// SIDE ELEMENT ----------------------------
+.side(@left: 0px, @top: 0px) {
+  left: @left;
+  top: @top;
+}
+// -----------------------------------------
+
+// BOX-SIZING ------------------------------
+.box-sizing(@type: border-box) {
+  // @type: content-box — width и height элемента без значений padding, border (по-умолчанию)
+  // @type: padding-box — width и height элемента включают в себя значения padding, но не border
+  // @type: border-box — width и height элемента включают в себя значения и padding, и border
+  -moz-box-sizing: @type;
+  -webkit-box-sizing: @type;
+  -ms-box-sizing: @type;
+  box-sizing: @type;
+}
+// -----------------------------------------
+
+// BORDER ----------------------------------
+.border(@color: #CCC, @thin: 1px) {
+  border: @thin solid @color;
+}
+// -----------------------------------------
+
+// OPACITY ELEMENT -------------------------
+.opacity(@opacity: 0.5) {
+  @opacity_ie: @opacity * 100;
+  filter: ~"alpha(opacity=@{opacity_ie})"; // IE 5-7
+  -ms-filter: %("progid:DXImageTransform.Microsoft.Alpha(Opacity=%d)", @opacity_ie); // IE 8
+  *zoom:1;
+  -moz-opacity: @opacity;
+  -khtml-opacity: @opacity;
+  -webkit-opacity: @opacity;
+  opacity: @opacity;
+}
+// -----------------------------------------
+
+// SHADOW BOX ------------------------------
+.shadow(@params) {
+  -webkit-box-shadow: @params;
+  -moz-box-shadow: @params;
+  -o-box-shadow: @params;
+  box-shadow: @params;
+}
+// -----------------------------------------
+
+// ONE PIXEL TEXT SHADOW -------------------
+.one-pixel-text-shadow(@color) {
+  .isNone(@color, '', '0px 1px 0px');
+  text-shadow: @isNone @color;
+}
+// -----------------------------------------
+
+// ROUND BORDER ----------------------------
+.round(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.round-custom(@topLeft: 0, @topRight: 0, @bottomRight: 0, @bottomLeft: 0) {
+  .round-top-left(@topLeft);
+  .round-top-right(@topRight);
+  .round-bottom-right(@bottomRight);
+  .round-bottom-left(@bottomLeft);
+}
+
+.round-top-right(@radius: 0) {
+  -webkit-border-top-right-radius: @radius;
+  -moz-border-top-right-radius: @radius;
+  border-top-right-radius: @radius;
+}
+
+.round-top-left(@radius: 0) {
+  -webkit-border-top-left-radius: @radius;
+  -moz-border-top-left-radius: @radius;
+  border-top-left-radius: @radius;
+}
+
+.round-bottom-right(@radius: 0) {
+  -webkit-border-bottom-right-radius: @radius;
+  -moz-border-bottom-right-radius: @radius;
+  border-bottom-right-radius: @radius;
+}
+
+.round-bottom-left(@radius: 0) {
+  -webkit-border-bottom-left-radius: @radius;
+  -moz-border-bottom-left-radius: @radius;
+  border-bottom-left-radius: @radius;
+}
+// -----------------------------------------
+
+// SPRITES ---------------------------------
+.sprite-helper(@x, @y, @grid_x, @grid_y) {
+  background-position: -((@x * @grid_x) - @grid_x) -((@y * @grid_y) - @grid_y);
+}
+// -----------------------------------------
+
+// USER SELECT -----------------------------
+.user-select (@value: none) {
+  // @value: none — пользователь не может выделить текст и любые вложенные элементы
+  // @value: text — пользователь может выделить текст (по-умолчанию)
+  // @value: all — двойной щелчок по элементу выделяет весь текст внутри его родителя
+  -webkit-user-select: @value;
+  -moz-user-select: @value;
+  -ms-user-select: @value;
+  -o-user-select: @value;
+  user-select: @value;
+}
+// -----------------------------------------
+
+
+// LINEAR GRADIENT -------------------------
+// @color: цвет градиента
+// @percent: насколько (в процентах) цвет окончания градиента отличается от начального цвета градиента
+// @isLighten: [true|false] true — цвет окончания ярче чем цвет начала градиента, false — цвет окончания темнее чем цвет начала градиента
+// @direction: [vertical|horizontal] vertical — снизу вверх, horizontal — слева на право
+.grad(@color, @percent: 20%, @isLighten: true, @direction: vertical) {
+  .isTrue(@isLighten, lighten(@color, @percent), darken(@color, @percent));
+  .gradient(@color, @isTrue, @direction);
+}
+
+// @startColor: цвет начала градиента
+// @endColor: цвет окончания градиента
+// @direction: [vertical|horizontal] vertical — снизу вверх, horizontal — слева на право
+.gradient(@startColor, @endColor, @direction: vertical) {
+
+  @ieGradientType: ~`('@{direction}' == 'horizontal')? 1: 0`;
+  @direct: ~`('@{direction}' == 'horizontal')? 'left': 'bottom'`;
+  @_direct: ~`('@{direction}' == 'horizontal')? 'to right': 'to top'`;
+
+  background-image: -webkit-linear-gradient(@direct, @startColor, @endColor);
+  background-image: -moz-linear-gradient(@direct, @startColor, @endColor);
+  background-image: -o-linear-gradient(@direct, @startColor, @endColor);
+  filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d, gradientType=%d)", @startColor, @endColor, @ieGradientType); // IE6 & 7
+  *zoom:1;
+  -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d, gradientType=%d)", @startColor, @endColor, @ieGradientType); // IE8
+  background-image: -ms-linear-gradient(@direct, @startColor, @endColor); // IE10
+  background-image: linear-gradient(@_direct, @startColor, @endColor);
+}
+
+// @directAngle: угол(в deg) направления градиента
+// @colors: все цвета в градиенте
+.gradient-custom(@directAngle, @colors) {
+  background-image: -webkit-linear-gradient(@directAngle, @colors);
+  background-image: -moz-linear-gradient(@directAngle, @colors);
+  background-image: -ms-linear-gradient(@directAngle, @colors);
+  background-image: -o-linear-gradient(@directAngle, @colors);
+  background-image: linear-gradient(@directAngle, @colors);
+}
+// -----------------------------------------
+
+// TRIANGLES -------------------------------
+// @dir: [top|bottom|left|right] куда указывает стрелочка
+// @size: размер(в px) стрелочки
+// @color: цвет стрелочки
+.triangle(@dir, @size: 5px, @color: #CCC) when(@dir = top) {
+  .triangle-helper(@size);
+  border-bottom-color: @color;
+  border-top: none;
+  position: relative;
+  top: ceil((@size / -2));
+}
+
+// @dir: [top|bottom|left|right] куда указывает стрелочка
+// @size: размер(в px) стрелочки
+// @color: цвет стрелочки
+.triangle(@dir, @size: 5px, @color: #CCC) when(@dir = bottom) {
+  .triangle-helper(@size);
+  border-top-color: @color;
+  border-bottom: none;
+  position: relative;
+  top: ceil((@size / -2));
+}
+
+// @dir: [top|bottom|left|right] куда указывает стрелочка
+// @size: размер(в px) стрелочки
+// @color: цвет стрелочки
+.triangle(@dir, @size: 5px, @color: #CCC) when(@dir = left) {
+  .triangle-helper(@size);
+  border-right-color: @color;
+  border-left: none;
+}
+
+// @dir: [top|bottom|left|right] куда указывает стрелочка
+// @size: размер(в px) стрелочки
+// @color: цвет стрелочки
+.triangle(@dir, @size: 5px, @color: #CCC) when(@dir = right) {
+  .triangle-helper(@size);
+  border-left-color: @color;
+  border-right: none;
+}
+
+.triangle-helper(@size) {
+  display: inline-block;
+  width: 0px;
+  height: 0px;
+  border:@size solid transparent;
+}
+// -----------------------------------------
+
+// TRANSITION ------------------------------
+.trans(@time: 0.5s, @function: ease-out, @prop: all) {
+  .transition(@prop @time @function);
+}
+.transition(@rule: all 0.5s ease-out) {
+  -webkit-transition: @rule;
+  -moz-transition: @rule;
+  -ms-transition: @rule;
+  -o-transition: @rule;
+  transition: @rule;
+}
+
+.transition-prop(@prop: all) {
+  -webkit-transition-property: @prop;
+  -moz-transition-property: @prop;
+  -ms-transition-property: @prop;
+  -o-transition-property: @prop;
+  transition-property: @prop;
+}
+.transition-time(@duration: 500ms) {
+  -webkit-transition-duration: @duration;
+  -moz-transition-duration: @duration;
+  -ms-transition-duration: @duration;
+  -o-transition-duration: @duration;
+  transition-duration: @duration;
+}
+.transition-function(@fun: ease-out) {
+  -webkit-transition-timing-function: @fun;
+  -moz-transition-timing-function: @fun;
+  -ms-transition-timing-function: @fun;
+  -o-transition-timing-function: @fun;
+  transition-timing-function: @fun;
+}
+.transition-origin(@x: 50%, @y: 50%) {
+  -webkit-transform-origin: @x @y;
+  -moz-transform-origin: @x @y;
+  -ms-transform-origin: @x @y;
+  -o-transform-origin: @x @y;
+  transform-origin: @x @y;
+}
+.transition-style(@val:preserve-3d) {
+  -webkit-transform-style: @val;
+  -moz-transform-style: @val;
+  -ms-transform-style: @val;
+  transform-style: @val;
+}
+// -----------------------------------------
+
+// PERSPECTIVE -----------------------------
+.perspective(@val: 800px) {
+  -webkit-perspective: @val;
+  -moz-perspective: @val;
+  -ms-perspective: @val;
+  perspective: @val;
+}
+.perspective-origin(@x: 50%, @y: 50%) {
+  -webkit-perspective-origin: @x @y;
+  -moz-perspective-origin: @x @y;
+  -ms-perspective-origin: @x @y;
+  perspective-origin: @x @y;
+}
+// -----------------------------------------
+
+// TRANSFORM -------------------------------
+.transform(@val) {
+  -webkit-transform: @val;
+  -moz-transform: @val;
+  -ms-transform: @val;
+  transform: @val;
+}
+.rotate(@deg: 45deg) {
+  -webkit-transform: rotate(@deg);
+  -moz-transform: rotate(@deg);
+  transform: rotate(@deg);
+}
+.rotateX(@deg: 45deg) {
+  -webkit-transform: rotateX(@deg);
+  -moz-transform: rotateX(@deg);
+  transform: rotateX(@deg);
+}
+.rotateY(@deg: 45deg) {
+  -webkit-transform: rotateY(@deg);
+  -moz-transform: rotateY(@deg);
+  transform: rotateY(@deg);
+}
+.rotateZ(@deg: 45deg) {
+  -webkit-transform: rotateZ(@deg);
+  -moz-transform: rotateZ(@deg);
+  transform: rotateZ(@deg);
+}
+
+.translate(@x: 0px, @y: 0px) {
+  -webkit-transform: translate(@x, @y);
+  -moz-transform: translate(@x, @y);
+  transform: translate(@x, @y);
+}
+.translateX(@x: 0px) {
+  -webkit-transform: translate(@x);
+  -moz-transform: translate(@x);
+  transform: translate(@x);
+}
+.translate3d(@x, @y, @z) {
+  -webkit-transform: translate3d(@x, @y, @z);
+  -moz-transform: translate3d(@x, @y, @z);
+  transform: translate3d(@x, @y, @z);
+}
+
+.scale(@ratio: 1.5) {
+  -webkit-transform: scale(@ratio);
+  -moz-transform: scale(@ratio);
+  transform: scale(@ratio);
+}
+.skew(@deg: 5deg) {
+  -webkit-transform: skew(@deg);
+  -moz-transform: skew(@deg);
+  transform: skew(@deg);
+}
+// -----------------------------------------
