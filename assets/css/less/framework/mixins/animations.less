@@ -3,40 +3,42 @@
 // -----------------------------------------
 
 // ANIMATIONS EXAMPLE ----------------------
-.an-shake() {
+#animation {
   .shake() {
-    0%, 100% {
-      .translateX(0);
+    ._shake() {
+      0%, 100% {
+        .translateX(0);
+      }
+      10%, 30%, 50%, 70%, 90% {
+        .translateX(-10px);
+      }
+      20%, 40%, 60%, 80% {
+        .translateX(10px);
+      }
     }
-    10%, 30%, 50%, 70%, 90% {
-      .translateX(-10px);
-    }
-    20%, 40%, 60%, 80% {
-      .translateX(10px);
-    }
+    @-webkit-keyframes shake {._shake();}
+    @-moz-keyframes shake {._shake();}
+    @-o-keyframes shake {._shake();}
+    @keyframes shake {._shake();}
   }
-  @-webkit-keyframes shake {.shake();}
-  @-moz-keyframes shake {.shake();}
-  @-o-keyframes shake {.shake();}
-  @keyframes shake {.shake();}
-}
 
-.an-fadeInRight() {
   .fadeInRight() {
-    0% {
-      opacity: 0;
-      .translateX(@x:20px);
+    ._fadeInRight() {
+      0% {
+        opacity: 0;
+        .translateX(@x:20px);
 
+      }
+      100% {
+        opacity: 1;
+        .translateX(0px);
+      }
     }
-    100% {
-      opacity: 1;
-      .translateX(0px);
-    }
+    @-webkit-keyframes fadeInRight {._fadeInRight();}
+    @-moz-keyframes fadeInRight {._fadeInRight();}
+    @-o-keyframes fadeInRight {._fadeInRight();}
+    @keyframes fadeInRight {._fadeInRight();}
   }
-  @-webkit-keyframes fadeInRight {.fadeInRight();}
-  @-moz-keyframes fadeInRight {.fadeInRight();}
-  @-o-keyframes fadeInRight {.fadeInRight();}
-  @keyframes fadeInRight {.fadeInRight();}
 }
 // -----------------------------------------
 
