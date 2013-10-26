@@ -121,10 +121,8 @@
 @_inputWidth: (@_inputWidthFull - 2 * @_inputBorderThin - 2 * @_inputPaddingLeftRight);
 
 @_hue: hue(@_inputBorderColor);
-@_errorHue: hue(@_errorColor);
-@_successHue: hue(@_successColor);
 @_disabledHue: hue(@_disabledColor);
-@_inputBorderColorFocus: hsl(@_hue, 46%, 55%);
+@_inputBorderColorFocus: hsl(@_hue, 50%, 50%);
 // стиль инпутов
 .inputNormal() {
   @borderColor: hsl(@_hue, 7%, 65%);
@@ -140,17 +138,20 @@
   .grad(hsl(@_hue, 1%, 96%), 3%);
 }
 
-.inputFocus() {
-  background: transparent;
-  background-color: #FFF;
-  .border(@_inputBorderColorFocus);
+/*.inputFocus(@borderColor, @isInput: true) {
+  @_isInput: @isInput;
+  .if() when(@_isInput = true) {
+    background-color: #FFF;
+  }.if();
 
-  @sh:       0 0 0 2px hsl(@_hue, 70%, 80%),
-       inset 0 1px 2px hsl(@_hue, 10%, 70%);
+  .border(@borderColor);
+  @hue: @borderColor;
+  @sh:       0 0 0 2px hsl(@hue, 70%, 80%),
+       inset 0 1px 2px hsl(@hue, 10%, 70%);
   .shadow(@sh);
 
   outline: none;
-}
+}*/
 .inputDisabled() {
   background: hsl(@_disabledHue, 30%, 96%);
   .shadow(0 1px 0px #FFF);
@@ -346,7 +347,7 @@
     color:@_textColor;
     .inputNormal();
     &:focus {
-      .inputFocus();
+      #style > .focus(@_inputBorderColorFocus);
     }
   }
   input:-moz-placeholder,
@@ -359,13 +360,10 @@
   }
 
   .@{-input--success} {
-    .border(hsl(@_successHue, 70%, 35%));
-    @sh: 0 0 0 2px hsl(@_successHue, 50%, 70%),
-                   inset 0 1px 2px hsl(15, 10%, 75%);
-    .shadow(@sh);
+    #style > .focus(@_successColor);
   }
   .@{-form-note--success} {
-    color: hsl(@_successHue, 70%, 30%);
+    color: @_successColor;
   }
   .@{-input--disabled} {
     .inputDisabled();
@@ -389,27 +387,26 @@
 
 // ошибки инпутов
 .Inputs-errors(@fontSizeTitleErrors) {
-
-  .errorStyle() {
-    color: hsl(@_errorHue, 55%, 30%);
-    .border(hsl(@_errorHue, 60%, 50%));
+  @errorHue: hue(@_errorColor);
+  .errorStyle(@errorColor) {
+    @errorHue: hue(@errorColor);
+    color: hsl(@errorHue, 55%, 30%);
+    .border(hsl(@errorHue, 60%, 50%));
     .round(@_round);
-    @sh: inset 0px 0px 4px hsl(@_errorHue, 65%, 93%),
-         inset 0px 1px 0px hsl(@_errorHue, 65%, 95%),
-         inset 1px 0px 0px hsl(@_errorHue, 65%, 90%),
-         inset -1px 0px 0px hsl(@_errorHue, 65%, 90%),
-               0 1px 2px hsl(@_errorHue, 40%, 70%);
+    @sh: inset 0px 0px 4px hsl(@errorHue, 65%, 93%),
+         inset 0px 1px 0px hsl(@errorHue, 65%, 95%),
+         inset 1px 0px 0px hsl(@errorHue, 65%, 90%),
+         inset -1px 0px 0px hsl(@errorHue, 65%, 90%),
+               0 1px 2px hsl(@errorHue, 40%, 70%);
     .shadow(@sh);
-    background-color: hsl(@_errorHue, 45%, 80%);
+    background-color: hsl(@errorHue, 45%, 80%);
   }
+
   .@{-input--error} {
-    .border(hsl(@_errorHue, 60%, 50%));
-    @sh:       0 0 0 2px hsl(@_errorHue, 70%, 75%),
-         inset 0 1px 2px hsl(@_errorHue, 10%, 75%);
-    .shadow(@sh);
+    #style > .focus(@_errorColor);
   }
   .@{-form-note--error} {
-    color: hsl(@_errorHue, 55%, 30%);
+    color: @_errorColor;
   }
 
   #animation > .fadeInRight(); // назначаем анимацию показа ошибки
@@ -423,7 +420,7 @@
     padding: @_inputPadding;
     margin-left: @_unitSpaceHalf;
     line-height: 17px;
-    .errorStyle();
+    .errorStyle(@_errorColor);
     &:before {
       content: ''; // TODO проверить свойства
       display: block;
@@ -431,13 +428,13 @@
       left: 0px;
       margin-left: -13px;
       top: 6px;
-      .triangle(left, 6px, hsl(@_errorHue, 60%, 50%));
+      .triangle(left, 6px, hsl(@errorHue, 60%, 50%));
     }
     .animation(fadeInRight, .75s, .8s, ease-in);
   }
   .@{-form-errors} {
     margin-bottom: @_unitSpaceHalf;
-    .errorStyle();
+    .errorStyle(@_errorColor);
     padding: @_unitSpaceHalf;
   }
   .@{-form-errors_title} {
@@ -445,8 +442,8 @@
     font-weight: bold;
     margin: 0 0 5px;
     padding-bottom: 5px;
-    .shadow(0px 1px 0px hsl(@_errorHue, 65%, 90%));
-    border-bottom: 1px solid hsl(@_errorHue, 60%, 50%);
+    .shadow(0px 1px 0px hsl(@errorHue, 65%, 90%));
+    border-bottom: 1px solid hsl(@errorHue, 60%, 50%);
   }
   .@{-form-errors_list} {
     list-style: none;
@@ -489,17 +486,14 @@
         .size(@checkRadioSize, @checkRadioSize);
         .inputNormal();
         &.@{-input--error} {
-          .border(hsl(@_errorHue, 60%, 50%));
-          @sh:       0 0 0 2px hsl(@_errorHue, 70%, 75%),
-               inset 0 1px 2px hsl(@_errorHue, 10%, 75%);
-          .shadow(@sh);
+          #style > .focus(@_errorColor);
         }
       }
       &:hover + .@{-chosen-custom} {
         .border(@_inputBorderColorFocus);
       }
       &:focus + .@{-chosen-custom} {
-        .inputFocus();
+        #style > .focus(@_inputBorderColorFocus);
       }
       &[disabled] + .@{-chosen-custom} {
         .inputDisabled();
@@ -588,7 +582,7 @@
         }
       }
       &:focus + .@{-select_custom} {
-        .inputFocus();
+        #style > .focus(@_inputBorderColorFocus);
         &:before {
           #style > .btnActive(@_inputBorderColor, false);
         }
@@ -673,7 +667,7 @@
     left:-9999px;
 
     &:focus + .@{-input-file_custom} {
-      .inputFocus();
+      #style > .focus(@_inputBorderColorFocus);
     }
     &:active + .@{-input-file_custom}:after {
       #style > .btnActive(@_inputBorderColor, false);

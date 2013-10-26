@@ -1,5 +1,4 @@
-#buttons { .init(@_unitSpace,
-                 @_btnHeightFull,
+#buttons { .init(@_btnHeightFull,
                  @_btnBorderColor,
                  @_round) {
 // -----------------------------------------
@@ -42,6 +41,7 @@
 // local variable and mixin ----------------
 @_btnPaddingTop: 4px;
 @_btnPaddingBottom: 5px;
+@_btnPaddingLeftRight: 10px;
 @_btnBorderThin: 1;
 
 @_btnHeight: (@_btnHeightFull - @_btnPaddingTop - @_btnPaddingBottom - 2 * @_btnBorderThin);
@@ -208,14 +208,15 @@
     display: inline-block;
     font-size: @btnFontSize !important;
     vertical-align: top;
-    padding: @_btnPaddingTop (@_unitSpace / 2) @_btnPaddingBottom;
+    padding: @_btnPaddingTop @_btnPaddingLeftRight @_btnPaddingBottom;
     @btnInnerReflex: (@_btnHeightFull  / 2);
     line-height:@_btnHeight;
     .user-select (none);
     #style > .btnNormal(@_btnBorderColor, @btnTextColor, @btnInnerReflex, true);
     .round(@_round);
 
-    &:hover {
+    &:hover,
+    &:focus {
       cursor: pointer;
       #style > .btnHover(@_btnBorderColor, @btnGlowColor, @btnInnerReflex, true);
     }
