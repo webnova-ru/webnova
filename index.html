@@ -293,11 +293,11 @@
                     </div>
                     <div class="-form-line">
                         <label class="-label" for="tel">Телефон</label>
-                        <span class="-form-note-inline">+7 (</span> <input class="-input-text -letter3" id="tel" type="text" name="tel" /> <span class="-form-note-inline">)</span>
-                        <input class="-input-text -letter9" type="text" name="tel2" />
+                        <span class="-form-note-inline">+7 (</span> <input class="-input-text -letters3" id="tel" type="text" name="tel" /> <span class="-form-note-inline">)</span>
+                        <input class="-input-text -letters9" type="text" name="tel2" />
                     </div>
                     <div class="-form-action">
-                        <button type="submit" class="-button">Сохранить</button>
+                        <button type="submit" class="-btn">Сохранить</button>
                     </div>
                 </form>
             </div>
@@ -372,7 +372,7 @@
                         </div>
                     </div>
                     <div class="-form-action">
-                        <button type="submit" class="-button">Сохранить</button>
+                        <button type="submit" class="-btn">Сохранить</button>
                     </div>
                 </form>
             </div>
@@ -382,8 +382,8 @@
             <div class="-form-line">
         <span class="-form-inline-group">
             <label class="-label-inline" for="name">ФИО:</label>
-            <input class="-input-text -letter4" type="text" name="">
-            <input class="-input-text -letter8" type="text" name="">
+            <input class="-input-text -letters4" type="text" name="">
+            <input class="-input-text -letters8" type="text" name="">
             <span class="-form-note-inline _text-ghost">заметка</span>
         </span>
                 <label class="-chosen_label -chosen_label--inline">
@@ -391,21 +391,21 @@
                 </label>
         <span class="-form-inline-group">
             <label class="-label-inline" for="name">Имя:</label>
-            <input class="-input-text -letter10" type="text" name=""/>
+            <input class="-input-text -letters10" type="text" name=""/>
             <select class="-select" id="se32l" name="sel">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select>
         </span>
-                <button type="submit" class="-button">Сохранить</button>
+                <button type="submit" class="-btn">Сохранить</button>
             </div>
         </form>
         <form action="">
             <div class="-form-line">
         <span class="-form-inline-group">
             <label class="-label-inline" for="name">ФИО:</label>
-            <input class="-input-text -letter7" type="text" name="">
+            <input class="-input-text -letters7" type="text" name="">
         </span>
         <span class="-form-inline-group">
             <label class="-chosen_label -chosen_label--inline">
@@ -415,7 +415,7 @@
                 <input class="-chosen_input" type="checkbox" name="rr"> Check me out
             </label>
         </span>
-                <button type="submit" class="-button">Сохранить</button>
+                <button type="submit" class="-btn">Сохранить</button>
             </div>
         </form>
         <h2 class="_spacer">Горизонтальная форма</h2>
@@ -440,7 +440,7 @@
                         <label class="-chosen_label"><input class="-chosen_input" type="checkbox"> Remember me</label>
                     </div>
                     <div class="-form-action">
-                        <button class="-button" type="submit">Sign in</button>
+                        <button class="-btn -btn--big" type="submit">Sign in</button>
                     </div>
                 </div>
             </div>
@@ -481,7 +481,7 @@
                 </div>
                 <div class="-form-line">
                     <div class="-form-line_right">
-                        <button class="-button" type="submit">Sign in</button>
+                        <button class="-btn" type="submit">Sign in</button>
                     </div>
                 </div>
             </fieldset>
@@ -518,14 +518,186 @@
                 <legend>Значки</legend>
                 <label class="-label-inline">Страница вконтакте</label>
                 <div class="-ui-group">
-                    <span class="-mark -ui-group_item">http://</span> <input class="-input-text -letter10 -ui-group_item" type="text"/>
+                    <span class="-mark -ui-group_item">http://</span> <input class="-input-text -letters10 -ui-group_item" type="text"/>
                     <span class="-mark -ui-group_item">@</span>
-                    <input class="-input-text -letter4 -ui-group_item" type="text"/><span class="-mark -ui-group_item">.ru</span>
+                    <input class="-input-text -letters4 -ui-group_item" type="text"/><span class="-mark -ui-group_item">.ru</span>
                     <!--comment-->
-                    <button class="-button -ui-group_item">поиск</button>
+                    <button class="-btn -ui-group_item">поиск</button>
                 </div>
             </fieldset>
         </form>
+
+        <section>
+            <h1>Кнопки</h1>
+            <article class="_spacer">
+                <h2>Общие кнопки</h2>
+                <div class="_spacer">
+                    <a class="-btn" href="#">ссылка</a>
+                    <span class="-btn">спан</span>
+                    <button class="-btn _spacer">баттон</button>
+                    <br/>
+
+                    <a class="-btn -btn--active _cursor-normal" href="#">ссылка</a>
+                    <span class="-btn -btn--active _cursor-normal">спан</span>
+                    <button class="-btn -btn--active _cursor-normal _spacer">баттон</button>
+                    <br/>
+
+                    <a class="-btn -btn--disabled" href="#">ссылка</a>
+                    <span class="-btn -btn--disabled">спан</span>
+                    <button class="-btn -btn--disabled" disabled="disabled">баттон</button>
+                </div>
+
+                <div class="_spacer">
+                    <div class="-ui-group">
+                        <span class="-btn -ui-group_item">спан</span>
+                        <a class="-btn -ui-group_item" href="#">ссылка</a>
+                        <button class="-btn -ui-group_item">баттон</button>
+                    </div>
+                    <div class="-ui-group">
+                        <a class="-btn -btn--active -ui-group_item" href="#">ссылка</a>
+                        <a class="-btn -ui-group_item" href="#">ссылка</a>
+                        <a class="-btn -ui-group_item" href="#">ссылка</a>
+                    </div>
+                    <div class="-ui-group">
+                        <span class="-btn -ui-group_item">спан</span>
+                        <span class="-btn -btn--active -ui-group_item">спан</span>
+                        <span class="-btn -ui-group_item">спан</span>
+                    </div>
+                    <div class="-ui-group">
+                        <button class="-btn -ui-group_item">баттон</button>
+                        <button class="-btn -ui-group_item">баттон</button>
+                        <button class="-btn -btn--active -ui-group_item">баттон</button>
+                    </div>
+                </div>
+
+            </article>
+
+            <article class="_spacer">
+                <h2>Большие кнопки</h2>
+                <a class="-btn -btn--big _spacer-r" href="#">большая кнопка</a>
+                <div class="-ui-group">
+                    <span class="-btn -btn--big -ui-group_item">спан</span>
+                    <a class="-btn -btn--big -ui-group_item" href="#">ссылка</a>
+                    <button class="-btn -btn--big -ui-group_item">баттон</button>
+                </div>
+            </article>
+
+            <article class="_spacer">
+                <h2>Группы кнопок и элементов</h2>
+                <div class="_spacer">
+                    <div class="-ui-group">
+                        <input class="-input-text -ui-group_item" type="text" name="seww"/>
+                        <button class="-btn -ui-group_item">найти</button>
+                    </div>
+                    <div class="-ui-group">
+                        <button class="-btn -ui-group_item">найти</button>
+                        <input class="-input-text -letters10 -ui-group_item" type="text" name="seww"/>
+                    </div>
+                </div>
+                <div class="_spacer">
+                    <a class="-btn" href="#">пред. стр.</a>
+                    <nav class="-ui-group">
+                        <a class="-btn -ui-group_item" href="#">1</a>
+                        <a class="-btn -ui-group_item" href="#">2</a>
+                        <a class="-btn -ui-group_item" href="#">3</a>
+                        <a class="-btn -ui-group_item" href="#">4</a>
+                        <a class="-btn -ui-group_item" href="#">5</a>
+                    </nav>
+                    <a class="-btn" href="#">след. страница</a>
+                </div>
+
+                <div class="_spacer">
+                    <span class="-ui-group">
+                        <span class="-mark -ui-group_item">+7 (</span>
+                        <input class="-input-text -letters3 -ui-group_item" type="text"/>
+                        <span class="-mark -ui-group_item">)</span>
+                        <input class="-input-text -letters8 -ui-group_item" type="text"/>
+                        <button class="-btn -ui-group_item">сохранить</button>
+                    </span>
+                    <span class="-ui-group">
+                        <span class="-mark -ui-group_item">+90</span>
+                        <a class="-btn -ui-group_item" href="#">лайк</a>
+                    </span>
+                </div>
+            </article>
+
+            <article>
+                <h2>Переключаемые кнопки</h2>
+                <div class="_spacer">
+                    <div class="-ui-group">
+                        <span class="-ui-group_item -mark">выбор:</span>
+                        <span class="-ui-group_item -btn" data-checkbox="hidden1">кнопка 1</span>
+                        <span class="-ui-group_item -btn" data-checkbox="hidden2">кнопка 2</span>
+                        <span class="-ui-group_item -btn" data-checkbox="hidden3">кнопка 3</span>
+                    </div>
+                    <div class="_hide">
+                        <input type="checkbox" name="hidden1" value="1"/>
+                        <input type="checkbox" name="hidden2" value="2"/>
+                        <input type="checkbox" name="hidden3" value="3"/>
+                    </div>
+                </div>
+                <div class="_spacer">
+                    <div class="-ui-group">
+                        <span class="-ui-group_item -btn" data-radio="radio1" data-radio-value="1">кнопка 1</span>
+                        <span class="-ui-group_item -btn" data-radio="radio1" data-radio-value="2">кнопка 2</span>
+                        <span class="-ui-group_item -btn" data-radio="radio1" data-radio-value="3">кнопка 3</span>
+                    </div>
+                    <div class="_hide">
+                        <input type="radio" name="radio1" value="1"/>
+                        <input type="radio" name="radio1" value="2"/>
+                        <input type="radio" name="radio1" value="3"/>
+                    </div>
+                </div>
+            </article>
+
+            <article>
+                <div class="_spacer">
+                    <h2>Кнопки картинкой</h2>
+                    <a href="#" class="-button _spacer">сохранить</a>
+                    <span class="-button">span</span>
+                    <button class="-button _spacer">зарегистрироваться</button>
+                    <br/>
+                    <a href="#" class="-button -button--disabled _spacer">disabled</a>
+                    <span class="-button -button--disabled">disabled</span>
+                    <button class="-button -button--disabled" disabled="disabled">disabled</button>
+                    <br/>
+                    <a href="#" class="-button -button--active">сохранить</a>
+                    <span class="-button -button--active">span</span>
+                    <button class="-button -button--active">зарегистрироваться</button>
+                </div>
+
+                <div class="_spacer">
+                    <h2>Серые кнопки картинкой</h2>
+                    <a href="#" class="-button -button--gray _spacer">сохранить</a>
+                    <span class="-button -button--gray">span</span>
+                    <button class="-button -button--gray ">зарегистрироваться</button>
+                    <br/>
+                    <a href="#" class="-button -button--gray -button--disabled _spacer">disabled</a>
+                    <span class="-button -button--gray -button--disabled">disabled</span>
+                    <button class="-button -button--gray -button--disabled" disabled="disabled">disabled</button>
+                    <br/>
+                    <a href="#" class="-button -button--gray -button--active">active</a>
+                    <span class="-button -button--gray -button--active">active</span>
+                    <button class="-button -button--gray -button--active">active</button>
+                </div>
+
+                <div class="_spacer">
+                    <a href="#" class="-button">сохранить</a>
+                    или
+                    <a href="#" class="-button -button--gray">отменить</a>
+                    или
+                    <button class="-button">сбросить</button>
+                    <a href="#" class="-button">далее</a>
+                    <a href="#" class="-button -button--gray">читать далее</a>
+                </div>
+
+                <div class="_spacer">
+                    <button class="-button">найти</button>
+                    <input class="-input-text -letters10" type="text" name="fds"/>
+                    <button class="-btn">баттон</button> <button class="-button -button--gray">баттон</button>
+                </div>
+            </article>
+        </section>
     </div> <!-- /page -->
 
 <!-- scripts -->

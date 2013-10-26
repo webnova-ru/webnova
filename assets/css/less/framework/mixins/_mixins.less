@@ -142,7 +142,9 @@
 
 // SPRITES ---------------------------------
 .sprite-helper(@x, @y, @grid_x, @grid_y) {
-  background-position: -((@x * @grid_x) - @grid_x) -((@y * @grid_y) - @grid_y);
+  @xPos: (@x * @grid_x - @grid_x);
+  @yPos: (@y * @grid_y - @grid_y);
+  background-position: -@xPos -@yPos;
 }
 // -----------------------------------------
 

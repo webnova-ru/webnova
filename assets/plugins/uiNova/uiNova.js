@@ -108,7 +108,7 @@
     // radio btn
     $.fn.radioBtn = function(action) {
         var options = {
-            toggleClass: '-btn--active',
+            toggleClass: '-btn--active _cursor-normal',
             dataAttr: 'radio',
             dataAttrValue: 'radioValue'
         };
