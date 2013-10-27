@@ -66,10 +66,10 @@
 @-letters: -letters; // ширина тесктового инпута по величине букв(2-10, 12, 16)
 // <input type="text" class="-input-text -letters2" />
 //
-@-width-33: -width-33; // разная ширина элементов выстоенных по горизонтали
-@-width-50: -width-50;
-@-width-100: -width-100;
-// <input type="text" class="-input-text -width-33" />
+@-width33: -width33; // разная ширина элементов выстоенных по горизонтали
+@-width50: -width50;
+@-width100: -width100;
+// <input type="text" class="-input-text -width33" />
 //
 @-chosen: -chosen; // контейнер для checkbox и radio
 @-chosen_label: -chosen_label; // подпись для checkbox и radio
@@ -138,20 +138,17 @@
   .grad(hsl(@_hue, 1%, 96%), 3%);
 }
 
-/*.inputFocus(@borderColor, @isInput: true) {
-  @_isInput: @isInput;
-  .if() when(@_isInput = true) {
-    background-color: #FFF;
-  }.if();
-
+.inputFocus(@borderColor) {
+  background-color: #FFF;
   .border(@borderColor);
-  @hue: @borderColor;
+
+  @hue: hue(@borderColor);
   @sh:       0 0 0 2px hsl(@hue, 70%, 80%),
-       inset 0 1px 2px hsl(@hue, 10%, 70%);
+  inset 0 1px 2px hsl(@hue, 10%, 70%);
   .shadow(@sh);
 
   outline: none;
-}*/
+}
 .inputDisabled() {
   background: hsl(@_disabledHue, 30%, 96%);
   .shadow(0 1px 0px #FFF);
@@ -205,7 +202,7 @@
   line-height: @_inputHeight;
 }
 .@{-input-file} {
- // height: @_inputHeightFull;
+
 }
 .@{-input-text} {
   height: @_inputHeight;
@@ -291,28 +288,28 @@
   .@{-letters}10 { width: (10 * @oneLetterWidth); }
   .@{-letters}12 { width: (12 * @oneLetterWidth); }
   .@{-letters}16 { width: (16 * @oneLetterWidth); }
-  .@{-width-33},
-  .@{-width-50},
-  .@{-width-100} {
+  .@{-width33},
+  .@{-width50},
+  .@{-width100} {
     .box-sizing(border-box);
   }
-  .@{-width-33} {
+  .@{-width33} {
     width: 33.33%;
   }
-  .@{-width-50} {
+  .@{-width50} {
     width: 50%;
   }
-  .@{-width-100} {
+  .@{-width100} {
     width: 100%;
   }
-  .@{-width-100},
-  .@{-width-50},
-  .@{-width-33} {
+  .@{-width100},
+  .@{-width50},
+  .@{-width33} {
     height: @_inputHeightFull;
   }
-  textarea.@{-width-100},
-  textarea.@{-width-50},
-  textarea.@{-width-33} {
+  textarea.@{-width100},
+  textarea.@{-width50},
+  textarea.@{-width33} {
     min-height: (4 * @_unitSpace + @_inputPaddingTop + @_inputPaddingBottom + 2 * @_inputBorderThin);
     height: auto;
   }
@@ -347,7 +344,7 @@
     color:@_textColor;
     .inputNormal();
     &:focus {
-      #style > .focus(@_inputBorderColorFocus);
+      .inputFocus(@_inputBorderColorFocus);
     }
   }
   input:-moz-placeholder,
@@ -360,7 +357,7 @@
   }
 
   .@{-input--success} {
-    #style > .focus(@_successColor);
+    .inputFocus(@_successColor);
   }
   .@{-form-note--success} {
     color: @_successColor;
@@ -403,7 +400,7 @@
   }
 
   .@{-input--error} {
-    #style > .focus(@_errorColor);
+    .inputFocus(@_errorColor);
   }
   .@{-form-note--error} {
     color: @_errorColor;
@@ -486,14 +483,14 @@
         .size(@checkRadioSize, @checkRadioSize);
         .inputNormal();
         &.@{-input--error} {
-          #style > .focus(@_errorColor);
+          .inputFocus(@_errorColor);
         }
       }
       &:hover + .@{-chosen-custom} {
         .border(@_inputBorderColorFocus);
       }
       &:focus + .@{-chosen-custom} {
-        #style > .focus(@_inputBorderColorFocus);
+        .inputFocus(@_inputBorderColorFocus);
       }
       &[disabled] + .@{-chosen-custom} {
         .inputDisabled();
@@ -582,7 +579,7 @@
         }
       }
       &:focus + .@{-select_custom} {
-        #style > .focus(@_inputBorderColorFocus);
+        .inputFocus(@_inputBorderColorFocus);
         &:before {
           #style > .btnActive(@_inputBorderColor, false);
         }
@@ -667,7 +664,7 @@
     left:-9999px;
 
     &:focus + .@{-input-file_custom} {
-      #style > .focus(@_inputBorderColorFocus);
+      .inputFocus(@_inputBorderColorFocus);
     }
     &:active + .@{-input-file_custom}:after {
       #style > .btnActive(@_inputBorderColor, false);
