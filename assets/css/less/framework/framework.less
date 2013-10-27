@@ -1,0 +1,215 @@
+#framework { .init(@path-imgFolder) {
+// -----------------------------------------
+// CONFIG FRAMEWORK FILE
+//------------------------------------------
+
+// includes
+@import "mixins/_mixins";
+@import "mixins/animations";
+@import "mixins/design";
+
+// CONFIG VARIABLES ------------------------
+@fontFamily: 'PT Sans', "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+@lineHeight: 22px;
+@fontSize: 15px;
+
+@fontSizeSmall: 11px;
+@fontSizeMiddle: 18px;
+@fontSizeBig: 24px;
+
+@bgColor: hsl(202, 4%, 94%);
+@textColor: hsl(197, 7%, 30%);
+@linkColor: hsl(197, 50%, 35%);
+@linkHoverColor: hsl(15, 52%, 42%);
+
+@round: 3px;
+
+@unit-space: 20px; // micromodule size
+////
+@borderColor: hsl(197, 7%, 55%);
+@glowColor: hsl(185, 75%, 70%);
+//------------------------------------------
+
+// NORMALIZE -------------------------------
+@import "components/normalize";
+#normalize > .init();
+//------------------------------------------
+
+// БАЗОВВЫЕ СТИЛИ HTML-ЭЛЕМЕНТОВ -----------
+@import "components/common";
+#common > .init(@fontSize;                // Основной размер шрифта сайта
+                @fontSizeBig;             // Размер шрифта заголовка h1
+                @fontSizeMiddle;          // Размер шрифта заголовка h2, h3, h4
+                @fontFamily;              // Гарнитура текста сайта
+                @lineHeight;              // Интерильяж
+                @textColor;               // Цвет текста сайта
+                lighten(@textColor, 30%); // Полупрозрачный цвет текста сайта
+                @linkColor;               // Цвет ссылок
+                @linkHoverColor;          // Цвет ссылки при наведении
+                yellow;                   // Цвет фона текста при выделении мышкой
+                #CCC;                     // Цвет текста плейсхолдеров
+                @bgColor);                // Цвет фона сайта
+
+// стиль элемента <code>
+#common > .init > .Code(#f8f8f8;      // Цвет фона
+                        #ddd;         // Цвет бордюра
+                        3px 3px 0px); // Поля (padding)
+
+// стиль элемента <pre>
+#common > .init > .Pre(@unit-space; // Внутрение поля элемента (px)
+                       #f8f8f8;     // Цвет фона
+                       #ddd;        // Цвет бордюра
+                       @round);     // Радиус скругления
+
+// стиль элемента <kbd>
+#common > .init > .Kbd(0 6px;                       // Поля (padding)
+                       0 2px 0 rgba(0, 0, 0, 0.2);  // Тень
+                       #444;                        // цвет текста
+                       #fafafa;                     // цвет фона
+                       #ccc;                        // цвет бордюра
+                       @round);                     // радиус скругления
+//------------------------------------------
+
+// LAYOUT ----------------------------------
+@import "components/layout";
+#layout > .init();
+
+// классы для плающего(float) позиционирования
+#layout > .init > .Float(@unit-space); // расстояние между float-элементами
+
+// модульная сетка
+#layout > .init > .Grid(@unit-space);  // расстояние между рядами модульной сетки
+
+// блоки расположенные плиткой с произвольной высотой
+#layout > .init > .Blocks-grid(@fontSize;          // Основной размер шрифта сайта
+                               260px;              // Ширина блока
+                               70px;               // Минимальная высота блока
+                               @unit-space;        // Расстояние по горизонтали между блоками
+                               (2 * @unit-space)); // Расстояние по вертикали между блоками
+//------------------------------------------
+
+// FORMS -----------------------------------
+@import "components/forms";
+#forms > .init(@unit-space;        // Расстояние между строками формы
+               220px;              // Длина инпута
+               30px;               // Высота инпута(полная с padding и margin)
+               @textColor;         // Цвет текста сайта
+               @borderColor;       // Цвет бордюра инпута
+               hsl(15, 55%, 50%);  // Цвет бордюра инпута с ошибкой
+               hsl(120, 45%, 45%);  // Цвет бордюра инпута с успехом
+               hsl(197, 30%, 96%); // Цвет бордюра недоступного инпута(disabled="disabled")
+               @round;             // Закругления уголков инпута
+               red);               // Цвет звёздочки для обязательных полей
+
+#forms > .init > .Input-sizes(8px); // Ширина одной буквы
+
+#forms > .init > .Form-horizont(120px;        // Ширина левой стороны
+                                @unit-space); // Отступ между правой и левой стороной
+
+#forms > .init > .Input-style();
+
+#forms > .init > .Inputs-errors(@fontSize);
+
+#forms > .init > .Inputs-errors > .Input-shake();
+
+#forms > .init > .Checkbox-radio();
+
+#forms > .init > .Select(#666;        // Цвет стрелочки вниз
+                         @glowColor); // Цвет свечения селекта при наведении мышки
+
+#forms > .init > .Input-file(100px;  // минимальная длина файлового инпута
+                             250px); // максимальная длина файлового инпута
+//------------------------------------------
+
+// КНОПКИ ----------------------------------
+@import "components/buttons";
+#buttons > .init(30px;         // Высота кнопки (полная)
+                 @borderColor; // Цвет бордюра кнопки
+                 @round);      // Закругленность кнопки
+
+#buttons > .init > .Button(@path-imgFolder;            // Путь до папки с картинками
+                           "sprite_button.png");       // Файл спрайта
+
+#buttons > .init > .Btn(14px;             // Размер шрифта текста на кнопке
+                        @textColor;       // Цвет текста кнопки
+                        @glowColor);      // Цвет свечения кнопки при наведении
+
+#buttons > .init > .Btn > .Btn-big((2 * @unit-space); // Высота кнопки (полная)
+                                   16px);             // Размер шрифта текста кнопки
+#buttons > .init > .Mark(14px;               // Размер шрифта текста в марке
+                         hsl(360, 0%, 90%)); // Цвет марки
+
+#buttons > .init > .Ui-group(@fontSize); // Размер шрифта текста внутри элементов группы
+//------------------------------------------
+
+// ОКНА И ПЛАШКИ ---------------------------
+//@import "components/windows";
+/*#windows > .init(@unit-space;               // микромодуль
+                 hsla(200, 30%, 75%, 0.3);  // цвет подложни окна
+                 hsl(32, 5%, 40%);         // цвет бордюра окна
+                 @bgColor;                  // цвет фона сайта
+                 0px);                   // скругления
+*/
+// [цвет кнопки бара, цвет текста на кнопке, свечение кнопки]
+//#windows > .init > .Head-tabs(@borderColor, @brand-colorText, @glowColor);
+//------------------------------------------
+
+// ТАБЛИЦЫ ---------------------------------
+//@import "components/tables";
+//#tables > .init(#AAA, (@unit-space / 2)); // [цвет бордюра, внутренние отступы ячеек]
+
+//#tables > .init > .sort-arrow(4px, #DDD, #555); // [размер, цвет, цвет активной]
+/*
+#tables > .init > .zebra(hsl(180, 5%, 92%);     // цвет нечётных строк
+                         #F3F3F3); // цвет чётных строк
+*/
+//#tables > .init > .hover(#DDD); // [цвет при наведении]
+
+//#tables > .init > .bordered((2 * @round)); // радиус закругления
+//------------------------------------------
+
+// РАЗНООБРАЗНЫЕ КЛАССЫ --------------------
+//@import "components/misc";
+//#misc > .init();
+
+//#misc > .init > .Arrows(4px, #AAA); // [размер, цвет]
+/*
+#misc > .init > .ToolTip(hsl(180, 60%, 85%); // цвет
+                         @round;             // скругления углов
+                         190px);             // максимальная длина подсказаки
+*/
+//#misc > .init > .Note();
+//------------------------------------------
+
+// ШРИФТОВЫЕ ИКОНКИ AWESOME ---------------
+//@import "components/font-awesome/font-awesome";
+//#font-awesome > .init('@{path-imgFolder}/icons/fonts/'); // Путь до папки с шрифтами
+
+//#font-awesome > .init > .Extras();
+
+//#font-awesome > .init > .Bootstrap();
+//------------------------------------------
+
+// КОСМЕТИЧЕСКИЕ КЛАССЫ --------------------
+@import "components/cosmetic";
+#cosmetic > .init();
+
+// классы различных отступов (margin)
+#cosmetic > .init > .Spacer(@unit-space); // размер отступов
+
+// классы различных полей (padding)
+#cosmetic > .init > .Padding(@unit-space); // размер полей
+
+// классы обнуления отступов (margin)
+#cosmetic > .init > .Null();
+
+// классы плавающего(float) позиционирования элементов
+#cosmetic > .init > .Float();
+
+// классы типографики элементов
+#cosmetic > .init > .Typography(@fontSizeBig;              // размер акцедентного шрифта
+                                @fontSizeMiddle;           // средний размер шрифта
+                                @fontSizeSmall;            // маленький размер шрифта
+                                lighten(@textColor, 30%)); // Полупрозрачный цвет шрифта
+//------------------------------------------
+}}
