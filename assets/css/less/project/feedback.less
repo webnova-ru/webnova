@@ -1,0 +1,90 @@
+#feedback { .init() {
+// -----------------------------------------
+/* ПРИМЕР ФОРМЫ ОБРАТНОЙ СВЯЗИ */
+// -----------------------------------------
+
+// variables
+@bgColor: hsl(202, 12%, 94%);
+@round: 3px;
+
+// style
+.feedbackBg {
+  background: hsl(30, 6%, 20%) url("/assets/img/wood_bg.jpg");
+}
+
+.feedback {
+  width: 600px;
+
+  padding: 10px;
+  margin: 80px auto 0px;
+
+  @redColor: hsl(0, 65%, 72%);
+  @blueColor: hsl(200, 65%, 72%);
+  @whiteColor: hsl(0, 100%, 100%);
+  @colorString: @blueColor 20px,
+                @whiteColor 20px,
+                @whiteColor 40px,
+                @redColor 40px,
+                @redColor 60px,
+                @whiteColor 60px,
+                @whiteColor 80px,
+                @blueColor 80px,
+                @blueColor 100px,
+                @whiteColor 100px,
+                @whiteColor 120px,
+                @redColor 120px,
+                @redColor 140px,
+                @whiteColor 140px,
+                @whiteColor 160px,
+                @blueColor 160px,
+                @blueColor 180px;
+  .gradient-custom(135deg; @colorString);
+  background-size: 113px 113px;
+  
+  .border(#fff, 2px);
+  @sh:       0px 1px 5px -2px #333,
+             0px 0px 0px 1px hsl(202, 10%, 80%),
+       inset 0px 0px 4px -1px #FFF;
+  .shadow(@sh);
+  .round(@round);
+}
+  .feedback_inner {
+    background-color: @bgColor;
+    .border(#fff, 2px);
+    @sh: 0px 0px 4px -1px #FFF,
+         inset 0px 0px 0px 1px hsl(202, 10%, 70%),
+         inset 0px 0px 4px -1px hsl(202, 10%, 50%);
+    .shadow(@sh);
+    .round(@round);
+  }
+.fb-title {
+  text-align: center;
+  margin: 30px 20px 20px;
+  @lineColor: hsl(202, 10%, 60%);
+  @colorString: @bgColor 10px, #FFF 10px, #FFF 11px, @lineColor 11px, @lineColor 12px, @bgColor 12px;
+  .gradient-custom(0deg, @colorString);
+}
+  .fb-title_text {
+    background-color: @bgColor;
+    padding: 0px 10px;
+
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    .one-pixel-text-shadow(#fff);
+  }
+
+.fb-form {
+  margin: 0px 20px 0px;
+}
+
+.info {
+  width: 560px;
+  color: #FFF;
+  margin: 0px auto 20px;
+  padding: 20px;
+}
+// -----------------------------------------
+}}

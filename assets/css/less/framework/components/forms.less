@@ -367,7 +367,7 @@
   .@{-form-action} {
     @color: hsl(32, 7%, 88%);
 
-    padding: @_unitSpaceHalf;
+    padding: @_unitSpaceHalf 0px;
     margin-top: @_unitSpace;
     background-color: @color;
     .round-bottom-left( (2 * @_round) );
@@ -413,16 +413,17 @@
     position: absolute;
     padding: @_inputPadding;
     margin-left: @_unitSpaceHalf;
-    line-height: 17px;
+    line-height: @_inputHeight;
     .errorStyle(@_errorColor);
     &:before {
-      content: ''; // TODO проверить свойства
+      @arrowSize: 6px;
+
+      content: '';
       display: block;
       position: absolute;
-      left: 0px;
-      margin-left: -13px;
-      top: 6px;
-      .triangle(left, 6px, hsl(@errorHue, 60%, 50%));
+      left: (-(@arrowSize + 1));
+      top: (@arrowSize / 2 + @_inputPaddingTop + 1);
+      .triangle(left, @arrowSize, hsl(@errorHue, 60%, 50%));
     }
     .animation(fadeInRight, .75s, .8s, ease-in);
   }
