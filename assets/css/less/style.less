@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+@import "framework/framework";
+#framework > .init('/assets/img');
+
+// -----------------------------------------
+/* PROJECT STYLE */
+// -----------------------------------------
+
+// includes
+@import "framework/mixins/_mixins";
+
+// variables and mixins
+
+// style
+body {
+  background-image: url("/assets/img/bg_page.png");
+  //background:#fff url("/assets/img/bg-grid20.png");
+}
+.page {
+  width: 960px;
+  margin: auto;
+}
+.box {
+  background-color: #CCCCCC;
+  padding: 10px;
+  text-align: center;
+}
+
+// пример страницы обратной связи
+@import "project/feedback";
+#feedback > .init();
+
+// тестирование миксимов
+@import "project/mixins-test";
+//#mixins-test > .init();
