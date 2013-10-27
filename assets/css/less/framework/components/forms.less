@@ -72,9 +72,8 @@
 // <input type="text" class="-input-text -width33" />
 //
 @-chosen: -chosen; // контейнер для checkbox и radio
+@-chosen--inline: -chosen--inline; //
 @-chosen_label: -chosen_label; // подпись для checkbox и radio
-@-chosen_label--inline: -chosen_label--inline; // подпись для checkbox и radio при строковой форме
-// <label class="-chosen_label -chosen_label--inline"><input type="checkbox" class="-chosen_input" name="rr1" /> Check me out</label>
 @-chosen_input: -chosen_input;
 // <div class="-chosen">
 //   <label class="-chosen_label"><input type="checkbox" class="-chosen_input" name="rr1" /> Check me out</label>
@@ -246,19 +245,16 @@
   min-height: @_unitSpace;
   padding-left: @_unitSpace;
 }
+.@{-chosen--inline} {
+  display: inline-block;
+  margin-right: 1em;
+}
 .@{-chosen_label} {
   font-weight: normal;
   cursor: pointer;
   display: inline;
   & [disabled] {
     cursor: default;
-  }
-}
-.@{-chosen_label--inline} {
-  margin-right: 1em;
-  & input {
-    float: none;
-    margin: 0;
   }
 }
 .@{-chosen_input} {
